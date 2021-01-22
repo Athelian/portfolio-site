@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.title-box {
+  color: white;
+  font-weight: 700;
+  font-size: 1.2cm;
+  margin-left: 10px;
+  display: flex;
+}
+
+#a {
+  padding-top: 12px;
+  margin-left: 20px;
+}
+
+button {
+  height: 216px;
+  min-width: 70px;
+  text-align: left;
+  font-size: x-large;
+  background-color: rgba(83, 83, 83, 0.89);
+  color: white;
+  font-weight: 600;
+  span {
+    writing-mode: tb-rl;
+    font-size: xx-large;
+    transform: rotate(180deg);
+    margin-left: 10px;
+  }
+}
+
+// button:hover {
+//   background-color: black;
+// }
+
+// #about:hover {
+//   width: 200px;
+
+// }
+
+#about:hover {
+  width:300px;
+}
+  
+#about:hover ~ #projects {
+  display: none;
+}
+
+#about:hover ~ #github {
+  display: none;
+}
+
+
+#menu {
+	width: 420px;
+	height: 216px;
+	background-color: rgba(226, 226, 226, 0.247);
+
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+  right: 0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transform: skew(-10deg);
+  	
+	margin: auto;
+}
