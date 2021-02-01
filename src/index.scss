@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,8 +9,12 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#main-buttons {
+  display: flex;
 }
 
 .title-box {
@@ -24,9 +28,11 @@ code {
 #a {
   padding-top: 12px;
   margin-left: 20px;
+  margin-right: 39px;
 }
 
 button {
+  float: right;
   height: 216px;
   min-width: 70px;
   text-align: left;
@@ -42,44 +48,26 @@ button {
   }
 }
 
-// button:hover {
-//   background-color: black;
-// }
-
 // #about:hover {
-//   width: 200px;
-
+//   width: 210px;
 // }
-
-#about:hover {
-  width:300px;
-}
-  
-#about:hover ~ #projects {
-  display: none;
-}
-
-#about:hover ~ #github {
-  display: none;
-}
-
 
 #menu {
-	width: 420px;
-	height: 216px;
-	background-color: rgba(226, 226, 226, 0.247);
+  width: 420px;
+  height: 216px;
+  background-color: rgba(226, 226, 226, 0.247);
 
-	position: absolute;
-	top:0;
-	bottom: 0;
-	left: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   right: 0;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   transform: skew(-10deg);
-  	
-	margin: auto;
+
+  margin: auto;
 }
