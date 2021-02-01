@@ -4,28 +4,38 @@ import "./components/MainButtons";
 
 function App() {
   const [buttonStates, setButtonStates] = useState({
-    about: { display: "", width: "" },
-    projects: { display: "", width: "" },
-    github: { display: "", width: "" },
+    about: { visibility: "", width: "" },
+    projects: { visibility: "", width: "" },
+    github: { visibility: "", width: "" },
   });
+  const [expanded, setExpanded] = useState(false);
 
   const mouseIn = (event) => {
+    console.log("mouse-in");
     setButtonStates((prevState, _) => {
       const newState = { ...prevState };
       newState[event.target.id].width = "210px";
       for (const id of Object.keys(newState)) {
-        if (id !== event.target.id) newState[id].display = "none";
+        if (id !== event.target.id) {
+          newState[id].visibility = "hidden";
+          newState[id].width = "0";
+        }
       }
       return newState;
     });
+    setExpanded(true);
   };
 
   const mouseOut = (event) => {
+    console.log("mouse-out");
     setButtonStates((prevState, _) => {
       const newState = { ...prevState };
       newState[event.target.id].width = null;
       for (const id of Object.keys(newState)) {
-        if (id !== event.target.id) newState[id].display = null;
+        if (id !== event.target.id) {
+          newState[id].visibility = null;
+          newState[id].width = null;
+        }
       }
       return newState;
     });
@@ -39,42 +49,50 @@ function App() {
           Austin
           <br /> Forbes
         </span>
+        {/* <CSSTransition
+          in={expanded}
+          timeout={300}
+          classNames="alert"
+          unmountOnExit
+          onExited={() => setExpanded(false)}
+        > */}
         <button
           onMouseEnter={mouseIn}
           onMouseLeave={mouseOut}
           className="link"
           id="about"
           style={{
-            display: buttonStates.about.display,
+            visibility: buttonStates.about.visibility,
             width: buttonStates.about.width,
           }}
         >
           <span>about </span>
         </button>
         <button
-          onMouseEnter={mouseIn}
-          onMouseLeave={mouseOut}
+          // onMouseEnter={mouseIn}
+          // onMouseLeave={mouseOut}
           className="link"
           id="projects"
           style={{
-            display: buttonStates.projects.display,
+            visibility: buttonStates.projects.visibility,
             width: buttonStates.projects.width,
           }}
         >
           <span>Projects</span>
         </button>
         <button
-          onMouseEnter={mouseIn}
-          onMouseLeave={mouseOut}
+          // onMouseEnter={mouseIn}
+          // onMouseLeave={mouseOut}
           className="link"
           id="github"
           style={{
-            display: buttonStates.github.display,
+            visibility: buttonStates.github.visibility,
             width: buttonStates.github.width,
           }}
         >
           <span>GitHub</span>
         </button>
+        {/* </CSSTransition> */}
       </div>
     </div>
   );

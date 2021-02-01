@@ -32,9 +32,11 @@ code {
 }
 
 button {
+  overflow: hidden;
+  transition: width 1s ease-in-out, visibility 1s ease-in-out;
   float: right;
   height: 216px;
-  min-width: 70px;
+  width: 70px;
   text-align: left;
   font-size: x-large;
   background-color: rgba(83, 83, 83, 0.89);
