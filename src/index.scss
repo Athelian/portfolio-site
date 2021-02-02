@@ -8,10 +8,6 @@ body {
   background-color: black;
 }
 
-#buttons {
-  width: 210px;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -21,7 +17,7 @@ code {
   display: flex;
 }
 
-.title-box {
+#title-box {
   color: white;
   font-weight: 700;
   font-size: 1.2cm;
@@ -29,28 +25,32 @@ code {
   display: contents;
 }
 
-#a {
+#name {
   left: 40px;
   position: absolute;
 }
 
-#about {
+#About {
   transition: width 1s, right 1s;
   position: absolute;
   right: 109px;
   left: 211px;
 }
 
-#projects {
+#Projects {
   transition: width 1s, right 1s;
   position: absolute;
   right: 69px;
 }
 
-#github {
+#GitHub {
   transition: width 1s, right 1s;
   position: absolute;
   right: -1px;
+}
+
+.button-title {
+  height: 58%;
 }
 
 button {
@@ -71,10 +71,6 @@ button {
     margin-left: 10px;
   }
 }
-
-// #about:hover {
-//   width: 210px;
-// }
 
 #menu {
   width: 420px;
