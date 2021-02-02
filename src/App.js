@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import "./App.css";
-import "./components/MainButtons";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.scss";
+
+import About from "./components/About";
 
 function App() {
   const buttons = ["Projects", "About", "GitHub"];
+  const [menuOpacityState, setMenuOpacityState] = useState("100%");
   const [buttonStates, setButtonStates] = useState({
     About: { width: "", right: "" }, // left
     Projects: { width: "", right: "" }, // middle
@@ -49,37 +52,53 @@ function App() {
 
   const createButton = (name) => {
     return (
-      <button
-        onMouseEnter={mouseIn}
-        onMouseLeave={mouseOut}
-        className="link"
-        id={name}
-        onClick={() => window.open("https://github.com/Athelian", "_blank")}
-        style={{
-          right: buttonStates[name].right,
-          width: buttonStates[name].width,
-        }}
-      >
-        <span className="button-title">
-          {name === "github"
-            ? "GitHub"
-            : name.charAt(0).toUpperCase() + name.slice(1)}
-        </span>
-      </button>
+      <Link to={name !== "GitHub" ? `/${name}` : "/"}>
+        <button
+          onMouseEnter={mouseIn}
+          onMouseLeave={mouseOut}
+          className="link"
+          id={name}
+          onClick={() => {
+            switch (name) {
+              case "GitHub":
+                return window.open("https://github.com/Athelian", "_blank");
+              case "About":
+                return setMenuOpacityState("10%");
+            }
+          }}
+          style={{
+            right: buttonStates[name].right,
+            width: buttonStates[name].width,
+          }}
+        >
+          <span className="button-title">
+            {name.charAt(0).toUpperCase() + name.slice(1)}
+          </span>
+        </button>
+      </Link>
     );
   };
 
   return (
-    <div id="menu">
-      <div id="title-box">
-        <span id="name">
-          Eliot <br />
-          Austin
-          <br /> Forbes
-        </span>
-        {buttons.map((name) => createButton(name))}
+    <Router>
+      <div id="menu" style={{ opacity: menuOpacityState }}>
+        <div id="title-box">
+          <span id="name">
+            Eliot <br />
+            Austin
+            <br /> Forbes
+          </span>
+          <div id="buttons">{buttons.map((name) => createButton(name))}</div>
+        </div>
       </div>
-    </div>
+
+      <div>
+        Yohoo
+        <Switch>
+          <Route path="/about" component={About}></Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
