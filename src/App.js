@@ -4,37 +4,42 @@ import "./components/MainButtons";
 
 function App() {
   const [buttonStates, setButtonStates] = useState({
-    about: { visibility: "", width: "" },
-    projects: { visibility: "", width: "" },
-    github: { visibility: "", width: "" },
+    about: { visibility: "", width: "", right: "" },
+    projects: { visibility: "", width: "", right: "" },
+    github: { visibility: "", width: "", right: "" },
   });
-  const [expanded, setExpanded] = useState(false);
 
-  const mouseIn = (event) => {
-    console.log("mouse-in");
+  const mouseIn = async (event) => {
+    // If the mouse is flicked too quickly, no target id is picked up
+    if (!event.target.id) return;
+
     setButtonStates((prevState, _) => {
       const newState = { ...prevState };
-      newState[event.target.id].width = "210px";
+      newState[event.target.id].width = "178px";
+
+      switch (event.target.id) {
+        case "projects":
+        case "about":
+          newState.projects.right = "15px";
+          break;
+        case "github":
+          newState.projects.right = "177px";
+      }
       for (const id of Object.keys(newState)) {
         if (id !== event.target.id) {
-          newState[id].visibility = "hidden";
           newState[id].width = "0";
         }
       }
       return newState;
     });
-    setExpanded(true);
   };
 
-  const mouseOut = (event) => {
-    console.log("mouse-out");
+  const mouseOut = () => {
     setButtonStates((prevState, _) => {
       const newState = { ...prevState };
-      newState[event.target.id].width = null;
-      for (const id of Object.keys(newState)) {
-        if (id !== event.target.id) {
-          newState[id].visibility = null;
-          newState[id].width = null;
+      for (const value in newState) {
+        for (const attribute in newState[value]) {
+          newState[value][attribute] = null;
         }
       }
       return newState;
@@ -49,45 +54,40 @@ function App() {
           Austin
           <br /> Forbes
         </span>
-        {/* <CSSTransition
-          in={expanded}
-          timeout={300}
-          classNames="alert"
-          unmountOnExit
-          onExited={() => setExpanded(false)}
-        > */}
         <button
           onMouseEnter={mouseIn}
           onMouseLeave={mouseOut}
           className="link"
           id="about"
           style={{
-            visibility: buttonStates.about.visibility,
+            // visibility: buttonStates.about.visibility,
             width: buttonStates.about.width,
           }}
         >
           <span>about </span>
         </button>
         <button
-          // onMouseEnter={mouseIn}
-          // onMouseLeave={mouseOut}
+          onMouseEnter={mouseIn}
+          onMouseLeave={mouseOut}
           className="link"
           id="projects"
           style={{
-            visibility: buttonStates.projects.visibility,
+            right: buttonStates.projects.right,
             width: buttonStates.projects.width,
+            // transition: buttonStates.projects.transition,
           }}
         >
           <span>Projects</span>
         </button>
         <button
-          // onMouseEnter={mouseIn}
-          // onMouseLeave={mouseOut}
+          onMouseEnter={mouseIn}
+          onMouseLeave={mouseOut}
           className="link"
           id="github"
           style={{
-            visibility: buttonStates.github.visibility,
+            // visibility: buttonStates.github.visibility,
             width: buttonStates.github.width,
+            // transition: buttonStates.github.transition,
           }}
         >
           <span>GitHub</span>

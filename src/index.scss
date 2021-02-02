@@ -8,6 +8,10 @@ body {
   background-color: black;
 }
 
+#buttons {
+  width: 210px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -22,18 +26,36 @@ code {
   font-weight: 700;
   font-size: 1.2cm;
   margin-left: 10px;
-  display: flex;
+  display: contents;
 }
 
 #a {
-  padding-top: 12px;
-  margin-left: 20px;
-  margin-right: 39px;
+  left: 40px;
+  position: absolute;
+}
+
+#about {
+  transition: width 1s, right 1s;
+  position: absolute;
+  right: 109px;
+  left: 211px;
+}
+
+#projects {
+  transition: width 1s, right 1s;
+  position: absolute;
+  right: 69px;
+}
+
+#github {
+  transition: width 1s, right 1s;
+  position: absolute;
+  right: -1px;
 }
 
 button {
   overflow: hidden;
-  transition: width 1s ease-in-out, visibility 1s ease-in-out;
+  transition: width 5s;
   float: right;
   height: 216px;
   width: 70px;
