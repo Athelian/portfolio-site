@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.scss";
-
 import About from "./components/About";
+import Projects from "./components/Projects";
 
 function App() {
   const buttons = ["Projects", "About", "GitHub"];
@@ -50,6 +50,11 @@ function App() {
     });
   };
 
+  const back = () => {
+    console.log("yay");
+    setMenuOpacityState("100%");
+  };
+
   const createButton = (name) => {
     return (
       <Link to={name !== "GitHub" ? `/${name}` : "/"}>
@@ -63,6 +68,7 @@ function App() {
               case "GitHub":
                 return window.open("https://github.com/Athelian", "_blank");
               case "About":
+              case "Projects":
                 return setMenuOpacityState("10%");
             }
           }}
@@ -91,13 +97,23 @@ function App() {
           <div id="buttons">{buttons.map((name) => createButton(name))}</div>
         </div>
       </div>
-
-      <div>
-        Yohoo
-        <Switch>
-          <Route path="/about" component={About}></Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/"></Route>
+        <Route path="/about">
+          <About
+            hook={() => {
+              setMenuOpacityState(null);
+            }}
+          />
+        </Route>
+        <Route path="/Projects">
+          <Projects
+            hook={() => {
+              setMenuOpacityState(null);
+            }}
+          />
+        </Route>
+      </Switch>
     </Router>
   );
 }

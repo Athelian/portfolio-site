@@ -95,3 +95,33 @@ button {
 
   margin: auto;
 }
+
+#about-window {
+  color: white;
+  height: 94%;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#about-text {
+  margin-right: 15px;
+}
+
+#about-box {
+  display: flex;
+}
+
+#about-pic {
+  width: 200px;
+}
+
+a {
+  color: white;
+}
+
+#projects-pdf {
+  width: 100%;
+}
