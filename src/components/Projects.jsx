@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import projects from "../images/projects.pdf";
 
 export default function Projects(props) {
+  const buttons = ["skillTrain", "Fruity", "warican", "chess", "okCupid"];
+
   return (
-    <div>
-      <Link id="about-back" to="/" onClick={() => props.hook()}>
+    <div id="buttons">
+      {/* <Link id="about-back" to="/" onClick={() => props.hook()}>
         Back
-      </Link>
-      <embed id="projects-pdf" src={projects} width="800px" height="2100px" />
+      </Link> */}
+      {buttons.map((name) => props.createButton(name, buttons))}
     </div>
   );
 }

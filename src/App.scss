@@ -36,21 +36,43 @@ code {
 
 #About {
   transition: width 1s, right 1s;
-  position: absolute;
   right: 109px;
   left: 211px;
 }
 
 #Projects {
-  transition: width 1s, right 1s;
-  position: absolute;
+  transition: width 1s, right 1s, left 1s;
   right: 69px;
 }
 
 #GitHub {
   transition: width 1s, right 1s;
-  position: absolute;
   right: -1px;
+}
+
+#skillTrain {
+  transition: width 1s, right 1s;
+  right: 280px;
+}
+
+#warican {
+  transition: width 1s, right 1s;
+  right: 140px;
+}
+
+#chess {
+  transition: width 1s, right 1s;
+  right: 70px;
+}
+
+#okCupid {
+  transition: width 1s, right 1s;
+  right: 0px;
+}
+
+#Fruity {
+  transition: width 1s, right 1s;
+  right: 210px;
 }
 
 .button-title {
@@ -58,6 +80,7 @@ code {
 }
 
 button {
+  position: absolute;
   overflow: hidden;
   transition: width 5s;
   float: right;
@@ -74,6 +97,10 @@ button {
     transform: rotate(180deg);
     margin-left: 10px;
   }
+}
+
+button:focus {
+  outline: none;
 }
 
 #menu {
