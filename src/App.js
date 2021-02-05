@@ -1,80 +1,33 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.scss";
 import About from "./components/About";
 import Projects from "./components/Projects";
 
 function App() {
   const buttons = ["Projects", "About", "GitHub"];
-  const [menuOpacityState, setMenuOpacityState] = useState("100%");
-  const [nameDisplayState, setNameDisplayState] = useState(null);
   const [buttonsActiveState, setButtonsActiveState] = useState(true);
+  const [homeState, setHomeState] = useState(true);
+  const [projectState, setProjectState] = useState(false);
+  const [aboutState, setAboutState] = useState(false);
 
   const [buttonStates, setButtonStates] = useState({
-    About: { width: "", right: "", display: "", left: "", backgroundcolor: "" }, // left
-    Projects: {
-      width: "",
-      right: "",
-      display: "",
-      left: "",
-      backgroundcolor: "",
-    }, // middle
-    GitHub: {
-      width: "",
-      right: "",
-      display: "",
-      left: "",
-      backgroundcolor: "",
-    }, // right
-    warican: {
-      width: "",
-      right: "",
-      display: "",
-      left: "",
-      backgroundcolor: "",
-      opacity: "",
-    },
-    skillTrain: {
-      width: "",
-      right: "",
-      display: "",
-      left: "",
-      backgroundcolor: "",
-      opacity: "",
-    },
-    chess: {
-      width: "",
-      right: "",
-      display: "",
-      left: "",
-      backgroundcolor: "",
-      opacity: "",
-    },
-    okCupid: {
-      width: "",
-      right: "",
-      display: "",
-      left: "",
-      backgroundcolor: "",
-    },
-    Fruity: {
-      width: "",
-      right: "",
-      display: "",
-      left: "",
-      backgroundcolor: "",
-    },
+    About: {},
+    Projects: {},
+    GitHub: {},
+    warican: {},
+    skillTrain: {},
+    chess: {},
+    okCupid: {},
+    Fruity: {},
   });
 
   const mouseIn = (buttons) => (event) => {
     // if the mouse is flicked too quickly, no target id is picked up
     if (!event.target || !event.target.id) return;
 
-    setButtonStates((prevState, _) => {
-      const newState = { ...prevState }; // cannot directly mutate + return previous state (oversight of react)
-      event.target.id === "GitHub" ||
-      event.target.id === "About" ||
-      event.target.id === "Projects"
+    setButtonStates((prevState) => {
+      const newState = { ...prevState };
+      buttons.includes(event.target.id)
         ? (newState[event.target.id].width = "178px")
         : (newState[event.target.id].width = "290px");
       switch (event.target.id) {
@@ -106,14 +59,8 @@ function App() {
       const newState = { ...prevState };
       for (const value in newState) {
         for (const attribute in newState[value]) {
-          if (value === "Projects" && nameDisplayState === "none") {
-            newState.Projects.width = null;
-            break;
-          }
-          if (
-            (value === "GitHub" || value === "About") &&
-            nameDisplayState === "none"
-          ) {
+          if (attribute === "opacity") continue;
+          if (buttons.includes(value) && projectState) {
             break;
           }
           newState[value][attribute] = null;
@@ -123,73 +70,63 @@ function App() {
     });
   };
 
-  const back = () => {
-    setMenuOpacityState(null);
-  };
-
   const createButton = (name, buttons) => {
     return (
-      <Link key={name} to={name !== "GitHub" ? `/${name}` : "/"}>
-        <button
-          onMouseEnter={
-            buttonsActiveState
-              ? name === "Projects" && nameDisplayState === "none"
-                ? null
-                : (e) => mouseIn(buttons)(e)
-              : null
-          }
-          onMouseLeave={
-            name === "Projects" && nameDisplayState === "none" ? null : mouseOut
-          }
-          className="link"
-          id={name}
-          onClick={() => {
+      <button
+        key={name}
+        onMouseEnter={
+          buttonsActiveState
+            ? name === "Projects" && projectState
+              ? null
+              : (e) => mouseIn(buttons)(e)
+            : null
+        }
+        onMouseLeave={
+          buttonsActiveState
+            ? name === "Projects" && projectState
+              ? null
+              : mouseOut
+            : null
+        }
+        className="link"
+        id={name}
+        onClick={() => {
+          if (buttonsActiveState) {
             switch (name) {
               case "GitHub":
                 window.open("https://github.com/Athelian", "_blank");
                 break;
               case "About":
-                setMenuOpacityState("10%");
+                setHomeState(false);
+                setAboutState(true);
                 break;
               case "Projects":
-                if (nameDisplayState === null) {
-                  setButtonStates((prevState, _) => {
-                    const newState = { ...prevState };
-                    newState.GitHub.display = "none";
-                    newState.About.display = "none";
-                    newState.Projects.right = "350px";
-                    newState.Projects.width = null;
-                    newState.Projects.backgroundcolor = "black";
-                    return newState;
-                  });
-                  setNameDisplayState("none");
+                if (!projectState) {
                   setButtonsActiveState(false);
-                  setTimeout(() => setButtonsActiveState(true), 1000);
+                  setHomeState(false);
+                  setProjectState(true);
+                  setTimeout(() => setButtonsActiveState(true), 100); //Avoid spam
                 }
                 break;
               default:
                 return;
             }
-          }}
-          style={{
-            left: buttonStates[name].left,
-            right: buttonStates[name].right,
-            width: buttonStates[name].width,
-            display: buttonStates[name].display,
-            backgroundColor: buttonStates[name].backgroundcolor,
-          }}
-        >
-          <span className="button-title">{name}</span>
-        </button>
-      </Link>
+          }
+        }}
+        style={{
+          ...buttonStates[name],
+        }}
+      >
+        <span className="button-title">{name}</span>
+      </button>
     );
   };
 
   return (
-    <Router>
-      <div id="menu" style={{ opacity: menuOpacityState }}>
+    <div>
+      <div id="menu" style={projectState ? { opacity: 1 } : { opacity: 1 }}>
         <div id="title-box">
-          <span id="name" style={{ display: nameDisplayState }}>
+          <span id="name" style={projectState ? { display: "none" } : null}>
             Eliot <br />
             Austin
             <br /> Forbes
@@ -197,17 +134,18 @@ function App() {
           <div id="buttons">
             {buttons.map((name) => createButton(name, buttons))}
           </div>
-          <Route path="/Projects">
-            <Projects hook={() => back()} createButton={createButton} />
-          </Route>
+          {projectState ? (
+            <Projects
+              hook={() => setHomeState(true)}
+              createButton={createButton}
+              setButtonStates={setButtonStates}
+              buttonStates={buttonStates}
+            />
+          ) : null}
         </div>
       </div>
-      <Switch>
-        <Route path="/about">
-          <About hook={() => back()} />
-        </Route>
-      </Switch>
-    </Router>
+      {aboutState ? <About hook={() => setHomeState(true)} /> : null}
+    </div>
   );
 }
 

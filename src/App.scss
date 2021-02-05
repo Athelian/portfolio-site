@@ -1,22 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: black;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-#main-buttons {
-  display: flex;
-}
-
 #title-box {
   color: white;
   font-weight: 700;
@@ -34,49 +15,21 @@ code {
   position: absolute;
 }
 
+.link {
+  transition: width 1s, right 1s, left 1s, opacity 2s;
+}
+
 #About {
-  transition: width 1s, right 1s;
   right: 109px;
   left: 211px;
 }
 
 #Projects {
-  transition: width 1s, right 1s, left 1s;
   right: 69px;
 }
 
 #GitHub {
-  transition: width 1s, right 1s;
   right: -1px;
-}
-
-#skillTrain {
-  transition: width 1s, right 1s;
-  right: 280px;
-}
-
-#warican {
-  transition: width 1s, right 1s;
-  right: 140px;
-}
-
-#chess {
-  transition: width 1s, right 1s;
-  right: 70px;
-}
-
-#okCupid {
-  transition: width 1s, right 1s;
-  right: 0px;
-}
-
-#Fruity {
-  transition: width 1s, right 1s;
-  right: 210px;
-}
-
-.button-title {
-  height: 58%;
 }
 
 button {
@@ -96,6 +49,7 @@ button {
     font-size: xx-large;
     transform: rotate(180deg);
     margin-left: 10px;
+    height: 58%;
   }
 }
 
@@ -121,34 +75,4 @@ button:focus {
   transform: skew(-10deg);
 
   margin: auto;
-}
-
-#about-window {
-  color: white;
-  height: 94%;
-  width: 80%;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#about-text {
-  margin-right: 15px;
-}
-
-#about-box {
-  display: flex;
-}
-
-#about-pic {
-  width: 200px;
-}
-
-a {
-  color: white;
-}
-
-#projects-pdf {
-  width: 100%;
 }

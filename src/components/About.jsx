@@ -1,6 +1,6 @@
 import React from "react";
 import pic from "../images/headshot.jpg";
-import { Link } from "react-router-dom";
+import "./About.scss";
 
 export default function About(props) {
   return (
@@ -15,9 +15,6 @@ export default function About(props) {
           Go.
           <br />
           <br />
-          <Link id="about-back" to="/" onClick={() => props.hook()}>
-            Back
-          </Link>
         </span>
 
         <img src={pic} id="about-pic" />
