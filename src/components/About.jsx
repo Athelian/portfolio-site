@@ -4,9 +4,9 @@ import "./About.scss";
 
 export default function About(props) {
   return (
-    <div id="about-window">
-      <div id="about-box">
-        <span id="about-text">
+    <div id="window">
+      <div id="box">
+        <span id="text">
           Eliot has been studying programming in his spare time for over a year
           while teaching mathematics and chemistry at a high-end cram school in
           central Tokyo. These days, he has been working full time on several
@@ -17,7 +17,7 @@ export default function About(props) {
           <br />
         </span>
 
-        <img src={pic} id="about-pic" />
+        <img src={pic} id="pic" />
       </div>
     </div>
   );

@@ -6,6 +6,15 @@
   display: contents;
 }
 
+img {
+  height: 20%;
+  width: 20%;
+}
+
+.button-title {
+  height: 100%;
+}
+
 #buttons {
   margin-bottom: auto;
 }
@@ -16,7 +25,7 @@
 }
 
 .link {
-  transition: width 1s, right 1s, left 1s, opacity 2s;
+  transition: width 1s, right 1s, left 1s, opacity 2s, bottom 1s;
 }
 
 #About {
@@ -33,6 +42,8 @@
 }
 
 button {
+  opacity: 1;
+  bottom: 0;
   position: absolute;
   overflow: hidden;
   transition: width 5s;

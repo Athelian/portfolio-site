@@ -8,8 +8,8 @@ export default function Projects(props) {
   useEffect(() => {
     //Pop up in menu post-render frame
     setButtonStates(() => {
-      buttonStates.GitHub.display = "none";
-      buttonStates.About.display = "none";
+      buttonStates.GitHub.opacity = "0";
+      buttonStates.About.opacity = "0";
       buttonStates.Projects.right = "350px";
       buttonStates.Projects.width = null;
       buttonStates.Projects.backgroundColor = "black";

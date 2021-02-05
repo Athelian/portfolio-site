@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import headshot from "./images/headshot.jpg";
 
 function App() {
-  const buttons = ["Projects", "About", "GitHub"];
+  const buttonsMain = ["Projects", "About", "GitHub"];
   const [buttonsActiveState, setButtonsActiveState] = useState(true);
   const [homeState, setHomeState] = useState(true);
   const [projectState, setProjectState] = useState(false);
@@ -27,9 +28,20 @@ function App() {
 
     setButtonStates((prevState) => {
       const newState = { ...prevState };
-      buttons.includes(event.target.id)
-        ? (newState[event.target.id].width = "178px")
-        : (newState[event.target.id].width = "290px");
+      if (buttonsMain.includes(event.target.id)) {
+        newState[event.target.id].width = "178px";
+        for (const button of buttons) {
+          if (button !== event.target.id) {
+            newState[button].width = "0"; // the other buttons disappear
+          }
+        }
+      } else {
+        newState[event.target.id].bottom = "40px";
+        for (const button of buttons) {
+          newState[button].transition = "opacity 0.2s, bottom 1s";
+          if (button !== event.target.id) newState[button].opacity = "0.5";
+        }
+      }
       switch (event.target.id) {
         case "Projects":
         case "About":
@@ -38,18 +50,9 @@ function App() {
         case "GitHub":
           newState.Projects.right = "177px";
           break;
-        case "warican":
-          newState.chess.right = "15px";
-          newState.warican.right = "30px";
-          newState.Fruity.right = "320px";
-          newState.skillTrain.right = "335px";
         default:
       }
-      for (const button of buttons) {
-        if (button !== event.target.id) {
-          newState[button].width = "0"; // the other buttons disappear
-        }
-      }
+
       return newState;
     });
   };
@@ -59,16 +62,27 @@ function App() {
       const newState = { ...prevState };
       for (const value in newState) {
         for (const attribute in newState[value]) {
-          if (attribute === "opacity") continue;
-          if (buttons.includes(value) && projectState) {
+          if (buttonsMain.includes(value) && projectState) {
             break;
           }
-          newState[value][attribute] = null;
+          if (
+            !projectState &&
+            !buttonsMain.includes(value) &&
+            attribute === "opacity"
+          ) {
+            newState[value][attribute] = "0";
+          } else {
+            newState[value][attribute] = attribute === "opacity" ? "1" : null; //hack
+          }
         }
       }
       return newState;
     });
   };
+
+  useEffect(() => {
+    if (!projectState) mouseOut();
+  }, [projectState]);
 
   const createButton = (name, buttons) => {
     return (
@@ -101,12 +115,10 @@ function App() {
                 setAboutState(true);
                 break;
               case "Projects":
-                if (!projectState) {
-                  setButtonsActiveState(false);
-                  setHomeState(false);
-                  setProjectState(true);
-                  setTimeout(() => setButtonsActiveState(true), 100); //Avoid spam
-                }
+                setButtonsActiveState(false);
+                setHomeState(projectState ? true : false);
+                setProjectState(projectState ? false : true);
+                setTimeout(() => setButtonsActiveState(true), 100); //Avoid spam
                 break;
               default:
                 return;
@@ -117,7 +129,10 @@ function App() {
           ...buttonStates[name],
         }}
       >
-        <span className="button-title">{name}</span>
+        <span className="button-title">
+          <img src={headshot} />
+          {name}
+        </span>
       </button>
     );
   };
@@ -132,7 +147,7 @@ function App() {
             <br /> Forbes
           </span>
           <div id="buttons">
-            {buttons.map((name) => createButton(name, buttons))}
+            {buttonsMain.map((name) => createButton(name, buttonsMain))}
           </div>
           {projectState ? (
             <Projects
