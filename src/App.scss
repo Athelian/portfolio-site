@@ -6,13 +6,16 @@
   display: contents;
 }
 
-img {
-  height: 20%;
-  width: 20%;
+#app-window {
+  height: 100%;
 }
 
-.button-title {
-  height: 100%;
+.logo {
+  height: 20%;
+  width: 20%;
+  margin-bottom: 6px;
+  margin-top: 5px;
+  transform: rotate(180deg);
 }
 
 #buttons {
@@ -31,14 +34,27 @@ img {
 #About {
   right: 109px;
   left: 211px;
+  span {
+    height: 90%;
+  }
 }
 
 #Projects {
   right: 69px;
+  span {
+    height: 90%;
+  }
+}
+
+a {
+  color: white;
 }
 
 #GitHub {
   right: -1px;
+  span {
+    height: 90%;
+  }
 }
 
 button {

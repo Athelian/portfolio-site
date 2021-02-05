@@ -2,12 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./App.scss";
 import About from "./components/About";
 import Projects from "./components/Projects";
-import headshot from "./images/headshot.jpg";
+import Fruity from "./images/Fruity.png";
+import skillTrain from "./images/skillTrain.png";
+import warican from "./images/warican.png";
+import chess from "./images/chess.png";
+import okCupid from "./images/okCupid.png";
+var md = require("markdown-it")();
+var result = md.render("# markdown-it rulezz!");
 
 function App() {
+  const images = {
+    Fruity: Fruity,
+    skillTrain: skillTrain,
+    warican: warican,
+    chess: chess,
+    okCupid: okCupid,
+  };
   const buttonsMain = ["Projects", "About", "GitHub"];
   const [buttonsActiveState, setButtonsActiveState] = useState(true);
-  const [homeState, setHomeState] = useState(true);
   const [projectState, setProjectState] = useState(false);
   const [aboutState, setAboutState] = useState(false);
 
@@ -90,14 +102,16 @@ function App() {
         key={name}
         onMouseEnter={
           buttonsActiveState
-            ? name === "Projects" && projectState
+            ? (name === "Projects" || name === "GitHub" || name === "About") &&
+              projectState
               ? null
               : (e) => mouseIn(buttons)(e)
             : null
         }
         onMouseLeave={
           buttonsActiveState
-            ? name === "Projects" && projectState
+            ? (name === "Projects" || name === "GitHub" || name === "About") &&
+              projectState
               ? null
               : mouseOut
             : null
@@ -105,20 +119,42 @@ function App() {
         className="link"
         id={name}
         onClick={() => {
-          if (buttonsActiveState) {
+          if (buttonsActiveState && !aboutState) {
             switch (name) {
               case "GitHub":
                 window.open("https://github.com/Athelian", "_blank");
                 break;
               case "About":
-                setHomeState(false);
                 setAboutState(true);
                 break;
               case "Projects":
                 setButtonsActiveState(false);
-                setHomeState(projectState ? true : false);
                 setProjectState(projectState ? false : true);
                 setTimeout(() => setButtonsActiveState(true), 100); //Avoid spam
+                break;
+              case "skillTrain":
+                window.open(
+                  "https://github.com/skilltrain/skilltrain-app",
+                  "_blank"
+                );
+                break;
+              case "Fruity":
+                window.open(
+                  "https://github.com/Athelian/fruit-importer",
+                  "_blank"
+                );
+                break;
+              case "warican":
+                window.open("https://github.com/team-chahan/warican", "_blank");
+                break;
+              case "chess":
+                window.open(
+                  "https://github.com/Athelian/Chess-Board",
+                  "_blank"
+                );
+                break;
+              case "okCupid":
+                window.open("https://github.com/Athelian/OkCupid", "_blank");
                 break;
               default:
                 return;
@@ -130,16 +166,19 @@ function App() {
         }}
       >
         <span className="button-title">
-          <img src={headshot} />
           {name}
+
+          {projectState && name !== "Projects" ? (
+            <img className="logo" src={images[name]} alt={name} />
+          ) : null}
         </span>
       </button>
     );
   };
 
   return (
-    <div>
-      <div id="menu" style={projectState ? { opacity: 1 } : { opacity: 1 }}>
+    <div id="app-window">
+      <div id="menu" style={aboutState ? { opacity: 0.2 } : { opacity: 1 }}>
         <div id="title-box">
           <span id="name" style={projectState ? { display: "none" } : null}>
             Eliot <br />
@@ -151,7 +190,6 @@ function App() {
           </div>
           {projectState ? (
             <Projects
-              hook={() => setHomeState(true)}
               createButton={createButton}
               setButtonStates={setButtonStates}
               buttonStates={buttonStates}
@@ -159,7 +197,8 @@ function App() {
           ) : null}
         </div>
       </div>
-      {aboutState ? <About hook={() => setHomeState(true)} /> : null}
+      {result}
+      {aboutState ? <About back={() => setAboutState(false)} /> : null}
     </div>
   );
 }
