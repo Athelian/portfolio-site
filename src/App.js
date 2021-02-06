@@ -7,8 +7,6 @@ import skillTrain from "./images/skillTrain.png";
 import warican from "./images/warican.png";
 import chess from "./images/chess.png";
 import okCupid from "./images/okCupid.png";
-var md = require("markdown-it")();
-var result = md.render("# markdown-it rulezz!");
 
 function App() {
   const images = {
