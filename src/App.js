@@ -195,7 +195,6 @@ function App() {
           ) : null}
         </div>
       </div>
-      {result}
       {aboutState ? <About back={() => setAboutState(false)} /> : null}
     </div>
   );
